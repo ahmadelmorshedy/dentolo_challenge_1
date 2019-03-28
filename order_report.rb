@@ -18,6 +18,20 @@ module DateRangePicker
   end
 end
 
+module ObjectFieldCalculator
+  # calculates the sum of the given field for the given objects array
+  # @param objects [Array] -> Array of objects
+  # @param field_name [Symbol/String] -> Name of field used in calculations
+  # @retrun sum [Integer/Fload] -> Sum of all field_name in the object
+  def self.sum(objects, field_name = :amount)
+    sum = 0
+    objects.each do |obj|
+      sum += obj.send(field_name)
+    end
+    sum
+  end
+end
+
 class OrdersReport
   def initialize(orders, start_date, end_date)
     @orders = orders
@@ -29,11 +43,7 @@ class OrdersReport
     orders_within_range = DateRangePicker.within_range(@orders, @start_date, @end_date)
 
     # sum orders amount
-    sum = 0
-    orders_within_range.each do |order|
-      sum += order.amount
-    end
-    sum
+    sum = ObjectFieldCalculator.sum(orders_within_range, :amount)
   end
 end
 
