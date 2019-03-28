@@ -13,7 +13,7 @@
 # it.
 #
 
-Dir[File.join(File.dirname(__FILE__), "../*.rb")].each { |f| require f }
+Dir[File.join(File.dirname(__FILE__), "../lib/*.rb")].each { |f| require f }
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
